@@ -1,0 +1,48 @@
+MyTracks scripts
+
+
+Dit is een uitleg hoe je MyTracks Scripts kunt maken
+
+• downloaden MyTraksScriptinstaller: http://www.mytracks4mac.info/index.php/en/faq-2/18-applescript-interface
+
+Sleep MyTraksScriptinstaller staat in map Applications
+
+Als je deze installer start en een script erin aanklikt zet ie 'm in the folder ~/Library/Application Scripts/info.stichling.myTracks (er komt dan een python en een plist bestand - hoe je die moet maken moet ik nog uitvinden)
+
+Dan Mytracks herstarten. De scripts vind je onder 'Menu'; Tools.
+     
+Hoe je die scripts in die installer krijgt weet ik nog niet. 
+
+Ik heb nu in Blinkerd een map 'Techno'; 'MM-Mytracks-plugin'; MM-csv-export aangemaakt en die als repository in Github aangemaakt.
+
+Daarin de originele .py en .plist van een script uit MyTracks, een kopie van het .py bestand 'ExportCSVforMM.py'. Dat wordt een testbestand voor mij. Misschien vervang ik die voor een ander script mocht ik die van Dirk Stichting van Mytracks krijgen.
+
+161031
+Ik heb een kml geïnporteerd in Mytracks en die geëxporteerd met de plugin. Deze file bekeken in txt en numbers. DE TIJD HEEFT IE ALLEEN NIET GOED GEÏMPORTEERD, MAAR DAT LIGT MISSCHIEN AAN DE KML IMPORT. LATER PROBEREN MET EEN IMPORT UIT EEN LOGGER. 
+Format lijkt redelijk op wat wij nodig hebben:
+
+No;Latitude;Longitude;Time;Elevation;Speed
+
+Wat ik moet aanpassen:
+• kolomvolgorde: date, time, y, x, altitude
+• kolom 'No' en 'Speed' kunnen weg
+• Latitude wordt y
+• Longtitude wordt x
+• Elevation wordt altitude
+• Time word date en time separaat
+
+Gedaan
+• regel 33 -> delimiter veranderd van ; naar ,
+• regel 34 was: writer.writerow(['No', 'Latitude', 'Longitude', 'Time', 'Elevation', 'Speed'])
+• regel 34 wordt: writer.writerow(['date', 'time', 'y', 'x', 'altitude'])
+
+-> de relaties tussen regel 34 en de werkelijke inhoud staan in regel 36-48
+
+• nu moet ik goed kijken hoe ik die aanpassingen zorgvuldig kan maken. Er zit een counter in en ik weet neit of ik die er zomaar uit kan gooien.
+
+• In regel 47: writer.writerow([count, latitude, longitude, time.strftime(timeFormat, timestamp).encode("utf-8"), elevation, speed])
+
+• Daar kan ik de volgorde veranderen, alleen zit ik met de tijd, die moet ik opsplitsen en daarvoor moet ik in regel 30 zijn: timeFormat = "%Y-%m-%d %H:%M:%S" en in regel 44: timestamp
+
+• Op een of andere manier moet ik ook een 'dateformat' en een 'datestamp' maken
+
