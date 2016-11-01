@@ -27,7 +27,8 @@ class App:
 	def go(self, filename):
 		myTracks = SBApplication.applicationWithBundleIdentifier_("info.stichling.myTracks")
 
-		timeFormat = "%Y-%m-%d %H:%M:%S"
+		timeFormat = "%H:%M:%S"
+		dateFormat = "%m/%d/%Y"
 
 		with codecs.open(filename, "w") as csvfile:
 			writer = csv.writer(csvfile, delimiter=',', quotechar='\\', quoting=csv.QUOTE_MINIMAL)
@@ -44,7 +45,7 @@ class App:
 					timestamp = time.localtime(point.timeIntervalSinceReferenceDate() + 978307200 + timezone*60) #point.timeIntervalSinceReferenceDate()
 					elevation = point.elevation()
 					speed = point.speed()
-					writer.writerow([time.strftime(timeFormat, timestamp).encode("utf-8"), time.strftime(timeFormat, timestamp).encode("utf-8"), latitude, longitude, elevation])
+					writer.writerow([time.strftime(dateFormat, timestamp).encode("utf-8"), time.strftime(timeFormat, timestamp).encode("utf-8"), latitude, longitude, elevation])
 					#("%.3f" % length).encode("utf-8"), tags, desc, count, waypointCount, photoCount])
 
 root = Tk()

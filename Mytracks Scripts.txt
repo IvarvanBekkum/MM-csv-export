@@ -10,15 +10,15 @@ Sleep MyTraksScriptinstaller staat in map Applications
 Als je deze installer start en een script erin aanklikt zet ie 'm in the folder ~/Library/Application Scripts/info.stichling.myTracks (er komt dan een python en een plist bestand - hoe je die moet maken moet ik nog uitvinden)
 
 Dan Mytracks herstarten. De scripts vind je onder 'Menu'; Tools.
-     
-Hoe je die scripts in die installer krijgt weet ik nog niet. 
+
+Hoe je die scripts in die installer krijgt weet ik nog niet.
 
 Ik heb nu in Blinkerd een map 'Techno'; 'MM-Mytracks-plugin'; MM-csv-export aangemaakt en die als repository in Github aangemaakt.
 
 Daarin de originele .py en .plist van een script uit MyTracks, een kopie van het .py bestand 'ExportCSVforMM.py'. Dat wordt een testbestand voor mij. Misschien vervang ik die voor een ander script mocht ik die van Dirk Stichting van Mytracks krijgen.
 
 161031
-Ik heb een kml geïnporteerd in Mytracks en die geëxporteerd met de plugin. Deze file bekeken in txt en numbers. DE TIJD HEEFT IE ALLEEN NIET GOED GEÏMPORTEERD, MAAR DAT LIGT MISSCHIEN AAN DE KML IMPORT. LATER PROBEREN MET EEN IMPORT UIT EEN LOGGER. 
+Ik heb een kml geïnporteerd in Mytracks en die geëxporteerd met de plugin. Deze file bekeken in txt en numbers. DE TIJD HEEFT IE ALLEEN NIET GOED GEÏMPORTEERD, MAAR DAT LIGT MISSCHIEN AAN DE KML IMPORT. LATER PROBEREN MET EEN IMPORT UIT EEN LOGGER.
 Format lijkt redelijk op wat wij nodig hebben:
 
 No;Latitude;Longitude;Time;Elevation;Speed
@@ -46,3 +46,11 @@ Gedaan
 
 • Op een of andere manier moet ik ook een 'dateformat' en een 'datestamp' maken
 
+NOG VERDER UITLEGGEN
+
+NB keuze voor %Y/%m/%d gaf een fout in MM. Wat ik nu heb gedaan niet.
+
+• Ik heb nu een 'dateFormat' gemaakt door de regel 30: timeFormat = "%Y-%m-%d %H:%M:%S" op te splitsen in een timeFormat en een dateFormat.
+• Ik heb voor het dateFormat wel de volgorde varanderd omdat deze een fout gaf bij 'Draw Track' in MM. Nog eens uitproberen welke volgorde wel en niet werkt is verstandig.
+• Ik ben ervan uitgegaan dat 'timestamp' zowel datum als tijd bevat. Dan de regel 47 aangepast door in de eerste variable 'timeFormat' te vervangen voor 'dateFormat'.
+-> De output is nu correct en bruikbaar in MM.
